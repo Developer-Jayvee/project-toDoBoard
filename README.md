@@ -26,7 +26,6 @@ First, create the project directory and clone both repositories inside it with t
 
 ```bash
 # Create project directory
-mkdir projet-toDoBoard
 cd projet-toDoBoard
 
 # Create frontend and backend directories
