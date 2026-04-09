@@ -32,29 +32,41 @@ cd projet-toDoBoard
 mkdir frontend backend
 
 # Clone frontend repository into frontend directory
+# Read the README.md file before building the docker
 git clone git@github.com:Developer-Jayvee/To-do-Board.git frontend/To-do-Board
 
 # Clone backend repository into backend directory
+#Read the README.md file before building the docker
 git clone git@github.com:Developer-Jayvee/To-do-Board-be.git backend/To-do-Board-be
 ```
+
 # Commands
 Then run this commmand synchronously
 ```bash
 
 # build
 docker compose up --build
+```
+### If not yet migrated run these 
+check backend/To-do-Board-be/database/migrations 
+if there is no files run these
+```bash
 
 # Open backend container
 docker compose exec backend bash
 
-# Run this command in order
+# Run this command in order then type 'yes'
 php artisan passport:install
-
+# run these if you type 'no'
+php artisan migrate
+```
+### Setup passport client
+```bash
 # Set the name to 'ToDoBoard_App'
 php artisan passport:client --personal 
-
-php artisan migrate
-
+```
+### Last run these commands
+```bash
 php artisan key:generate 
 
 php artisan db:seed --class=CategorySeed
