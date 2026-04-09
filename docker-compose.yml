@@ -1,0 +1,41 @@
+version: '3.9'
+
+services:
+  frontend:
+    build: ./frontend/To-do-Board
+    container_name: toDoBoard_fe
+    volumes:
+      - ./frontend/To-do-Board:/app
+      - /app/node_modules
+    ports:
+      - "5173:5173"
+    depends_on:
+      - backend
+    
+  backend:
+    build: ./backend/To-do-Board-be
+    container_name: toDoBoard_be
+    ports:
+      - "8080:8000"
+    depends_on:
+      - db
+    volumes:
+      - ./backend/To-do-Board-be:/var/www
+      - /var/www/vendor
+    environment:
+      - DB_HOST=db
+      - DB_DATABASE=toDoBoard_DB
+      - DB_USERNAME=laravelWSL
+      - DB_PASSWORD=J@yv33localhost2026
+
+  db:
+    image: mysql:8
+    container_name: mysql_db
+    restart: always
+    environment:
+      - MYSQL_ROOT_PASSWORD=J@yv33localhost2026
+      - MYSQL_DATABASE=toDoBoard_DB
+      - MYSQL_USER=laravelWSL
+      - MYSQL_PASSWORD=J@yv33localhost2026
+    ports:
+      - "3306:3306"
